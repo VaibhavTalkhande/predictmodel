@@ -1,0 +1,5 @@
+{
+  "name": "PredictGenie",
+  "description": "An intelligent competitor price tracking and dynamic pricing application. PredictGenie monitors your competitors' pricing in real-time and provides AI-powered suggestions to optimize your pricing strategy and maximize profits.",
+  "requestFramePermissions": []
+}
