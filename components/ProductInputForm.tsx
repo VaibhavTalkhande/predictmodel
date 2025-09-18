@@ -44,7 +44,7 @@ export const ProductInputForm: React.FC<ProductInputFormProps> = ({ onAnalyze, i
   };
   
   const triggerSuggestions = useCallback(async (url: string) => {
-      if (!isUrlValid(url)) return;
+      if (!url.trim()) return;
       setIsSuggesting(true);
       setError(null);
       try {
@@ -106,29 +106,29 @@ export const ProductInputForm: React.FC<ProductInputFormProps> = ({ onAnalyze, i
   }, [competitorUrls]);
 
 
-  const isUrlValid = (url: string) => {
-    try {
-      // Use a more robust regex to check for valid URL structure
-      const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-      return !!pattern.test(url);
-    } catch (_) {
-      return false;
-    }
-  };
+  // const isUrlValid = (url: string) => {
+  //   try {
+  //     // Use a more robust regex to check for valid URL structure
+  //     const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+  //       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+  //       '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+  //       '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+  //       '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+  //       '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  //     return !!pattern.test(url);
+  //   } catch (_) {
+  //     return false;
+  //   }
+  // };
 
   const handleSubmitUrl = (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    if (!userProductUrl.trim() || !isUrlValid(userProductUrl)) {
+    if (!userProductUrl.trim() ) {
       setError('Please enter a valid URL for your product.');
       return;
     }
-    const validCompetitorUrls = competitorUrls.filter(url => url.trim() && isUrlValid(url));
+    const validCompetitorUrls = competitorUrls.filter(url => url.trim());
     onAnalyze({ type: 'url', userProductUrl, competitorUrls: validCompetitorUrls });
   };
   
