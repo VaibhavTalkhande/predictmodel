@@ -1,7 +1,7 @@
 ## Run Locally
 
 **Prerequisites:**  Node.js
-
+**TechStack:** Reactjs,Typescript
 
 1. Install dependencies:
    `npm install`
